@@ -7,3 +7,5 @@ Homework
 • Please take screenshots and briefly describe the process. Output the result as a PDF and submit it to the workspace.
 • Please use a terminal (Git Bash, PowerShell, cmd, etc.) for this assignment.• Please take screenshots and briefly describe the process. Output the result as a PDF and submit it to the workspace.
 • Please use a terminal (Git Bash, PowerShell, cmd, etc.) for this assignment.
+• Please take screenshots and briefly describe the process. Output the result as a PDF and submit it to the workspace.
+• Please use a terminal (Git Bash, PowerShell, cmd, etc.) for this assignment.
