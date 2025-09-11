@@ -4,3 +4,5 @@ Homework
 2. Push a new commit to the new branch.
 3. Check out the main branch and merge the changes.
 4. Use git log + git revert to revert to any previous revision.
+• Please take screenshots and briefly describe the process. Output the result as a PDF and submit it to the workspace.
+• Please use a terminal (Git Bash, PowerShell, cmd, etc.) for this assignment.
