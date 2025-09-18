@@ -2,10 +2,68 @@
 <html>
     <head>
         <title>About me_蔡典儒</title>
+        <link rel="stylesheet" herf="C:\Users\蔡典儒\Desktop\ME2025Demo\HW3_htmlAndCss\css\112303537_css.css">
     </head>
     <body>
         <h1>蔡典儒</h1>
+        <ul type="disc">
+            <li>出生日期:2005/04/10</li>
+            <li>就讀大學:國立中央大學</li>
+            <li>興趣:旅遊、打羽球、看小說</li>
+        </ul>
+        <img src="C:\Users\蔡典儒\Desktop\ME2025Demo\HW3_htmlAndCss\img\bbq.jpg" alt="picture failure "width="600px" height="400px" >
+        <iframe width="600" height="400" src="https://www.youtube.com/embed/_Cr6WpuAzn8?si=Grr9nCLqV4pkPYzK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> 
+        <h3>回饋表單</h3>
 
-       
+    <form action="C:\Users\蔡典儒\Desktop\ME2025Demo\HW3_htmlAndCss\112303537_index.html" method="get">
+
+        <label for="name">姓名：<br></label>
+        <input type="text" id="name" name="name" placeholder="請輸入姓名" >
+        <label class="inline">
+            <input type="checkbox" id="anonymous" name="anonymous" />匿名<br> <br>
+        </label>
+
+
+        <label for="source">你是從哪裡知道這個網站的？<br></label>
+        <select id="source" name="source" required>
+            <option value="" selected disabled>— 請選擇 —</option>
+            <option>朋友推薦</option>
+            <option>學校/社團</option>
+            <option>社群媒體</option>
+            <option>搜尋引擎</option>
+            <option>其他</option>
+        </select>
+
+        <label><br> <br>你最喜歡的休閒活動：</label>
+        <label><input type="radio" name="hobby" value="運動" /> 運動</label>
+        <label><input type="radio" name="hobby" value="音樂" /> 音樂</label>
+        <label><input type="radio" name="hobby" value="閱讀" /> 閱讀</label><br> <br>
+
+
+        <label>你平常喜歡的音樂類型（可複選）：<br></label>
+        <label><input type="checkbox" name="music[]" value="流行" /> 流行<br></label>
+        <label><input type="checkbox" name="music[]" value="搖滾" /> 搖滾<br></label>
+        <label><input type="checkbox" name="music[]" value="古典" /> 古典<br></label>
+        <label><input type="checkbox" name="music[]" value="爵士" /> 爵士<br> <br></label>
+      
+
+        <label for="note">備註：<br></label>
+        <textarea id="note" name="note" placeholder="想說的都可以寫在這裡～"></textarea><br>
+
+        <button type="submit">送出留言</button>
+    </form>
+
+    <script>
+    // 勾選「匿名」就停用姓名欄位
+    const anon = document.getElementById('anonymous');
+    const nameInput = document.getElementById('name');
+    anon.addEventListener('change', () => {
+      nameInput.disabled = anon.checked;
+      if (anon.checked) nameInput.value = '';
+    });
+    </script>
+
+
+
     </body>
 </html>
