@@ -3,18 +3,30 @@ body{
     margin: 0px;
 }
 
-ul{
+h1{
+    margin-left: 60px;
+}
+
+table, form, h3{
+    margin-left: 40px;
+}
+
+img{
+    margin-left: 25px;
+}
+
+ul.DropDown{
     list-style-type: none;
     padding: 20px;
     background-color: rgb(7, 247, 195);
     overflow: hidden;
 }
 
-li{
+li.DropDown{
     float:left;   
 }
 
-li a{
+li.DropDown a{
     padding: 20px;
     text-decoration: none;
     font-size: 20px;
@@ -22,17 +34,9 @@ li a{
     text-align: center;
 }
 
-li a:hover{
+li.DropDown a:hover{
     background-color: aqua;
     color:red;
-}
-
-.listing{
-    all: unset;
-}
-
-ul.listing{
-    list-style-type: disc;
 }
 
 
@@ -40,7 +44,7 @@ ul.listing{
   display: none;
   position: absolute;
   z-index: 1;
-  
+
 }
 
 
