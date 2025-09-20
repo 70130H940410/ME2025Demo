@@ -11,10 +11,7 @@ ul{
 }
 
 li{
-    float:left;
-    border-right: 1px solid green;
-    border-left: 1px solid green;
-    
+    float:left;   
 }
 
 li a{
@@ -29,3 +26,29 @@ li a:hover{
     background-color: aqua;
     color:red;
 }
+
+.listing{
+    all: unset;
+}
+
+ul.listing{
+    list-style-type: disc;
+}
+
+
+.DropDownContent {
+  display: none;
+  position: absolute;
+  z-index: 1;
+}
+
+
+
+.DropDownContent a {
+  padding: none;
+  display: block;
+}
+
+.DropDownMenu:hover .DropDownContent {display: block;}
+
+    
