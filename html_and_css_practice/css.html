@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>css practice</title>
+        <style>
+            body{
+                height: 2000px;
+            }
+            *{
+                background-color: purple;
+            }
+            div{
+                color: red;
+            
+            }
+            div{
+                color: red;
+                margin: 20px;
+                border: 15px dashed green;
+                border-radius: 50%;
+                padding: 50px;
+                width: 100px;
+                height: 100px;
+                font-family: 標楷體;
+                font-size: 30px;
+                text-align: center;
+
+                float: right;
+            }
+            input{
+                color: aquamarine;
+            }
+            .class:hover{
+                color: black;
+                background-color: bisque;
+            }
+            .class::selection{
+                background-color: greenyellow;
+                color: black;
+            }
+            .class_2:hover{
+                background-color: rgb(234, 196, 255);
+            }
+            #id_1{
+                display: inline-block;
+                position: sticky;
+                top: 0px;
+                left: 10px;
+
+                z-index: 4;
+            }
+            #id_2{
+                border-radius: 10px;
+                display: inline;
+                position: relative;
+                top: 50px;
+                left: 100px;
+                z-index: 3;
+                box-shadow: 20px 20px 50px 10px gray;
+                transition-duration: 3s;
+                transition-delay: 1s;
+                transition-timing-function: linear;
+
+                animation-name: running_1;
+                animation-duration: 8s;
+                animation-iteration-count: infinite;
+                animation-delay: 1s;
+            }
+             #id_2:hover{
+                transform: translate(50px, 50px) rotate(45deg) scale(1.5,0.6) skew(20deg,30deg);
+            }
+            #id_3{
+                color: brown;
+                display: block;
+                position: relative;
+                bottom: 50px;
+                right: 100px;
+                z-index: 2;
+
+                animation: running_2 5s 0s infinite;
+            }
+            #id_4{
+                display: block;
+                position: fixed;
+                z-index: 1;
+                text-shadow:20px 20px 3px gray;
+            }
+            input::placeholder{
+                color: rgb(10, 207, 207);
+            }
+            @keyframes running_1{
+                from{top: 50px;left: 100px}
+                to{top: 200px;left: 300px}
+            }
+            @keyframes running_2{
+                0%{bottom: 50px;right: 100px}
+                25%{bottom: 100px;right: 100px}
+                50%{bottom: 100px;right: 2000px}
+                75%{bottom: 50px;right: 200px}
+                100%{bottom: 50px;right: 100px}
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="id_1" class="class">1</div>
+        <div id="id_2" class="class">2</div>
+        <div id="id_3" class="class_2 class">3</div>
+        <div id="id_4" class="class">4</div>
+        <input placeholder="placeholder">
+        萬用選擇器*all類型(標籤)選擇器tag類別選擇器.classID選擇器#id虛擬類別:pseudo-classes虛擬元素::pseudo-elements
+
+    </body>
+</html>
