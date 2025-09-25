@@ -16,6 +16,8 @@ form.addEventListener("submit", function (e) {
     const n = Number(input.value);
     guessCount++;
 
+    
+
 
     if (n > ans) {
         alert("太大了，請再試一次。");
@@ -27,6 +29,7 @@ form.addEventListener("submit", function (e) {
         alert(`恭喜你，猜對了！答案是 ${ans}，你總共猜了 ${guessCount} 次。`);
         ans = newAns();
         guessCount = 0;
+        
     }
 });
 
