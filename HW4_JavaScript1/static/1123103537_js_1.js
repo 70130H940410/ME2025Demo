@@ -1,1 +1,2 @@
-alert("hello");
+let randomNum=Math.random()
+
