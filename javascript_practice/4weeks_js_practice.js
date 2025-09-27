@@ -1,12 +1,22 @@
+function func9(){
+    const today1=new Date();
+    console.log(today1.toLocaleTimeString());
+}
+
+
+
+
+/////////////////////////////////////////////
+
+let form_1=document.forms["form_name"];
+console.log("form1:"+ form_1["element_1"].value);
+console.log("form2:"+ form_1["element_2"].placeholder);
+
+/////////////////////////////////////////////
+
 const today=new Date();
 console.log(today.getHours());
 console.log(today.toLocaleTimeString());
-
-
-
-
-
-
 
 /////////////////////////////////////////////
 
