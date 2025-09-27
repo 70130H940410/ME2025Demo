@@ -20,9 +20,11 @@ function func(){
 
     if (n > ans) {
         alert("太大了，請再試一次。");
+        input.value = "";
     }
     else if (n < ans) {
         alert("太小了，請再試一次。");
+        input.value = "";
     }
     else {
         alert("恭喜你，猜對了！答案是 "+ ans+ "你總共猜了" + guessCount + "次。");
