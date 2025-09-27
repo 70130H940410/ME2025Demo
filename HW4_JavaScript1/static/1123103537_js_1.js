@@ -3,6 +3,7 @@ function newAns() {
 }
 
 let ans=newAns();
+console.log(ans)
 let guessCount=0;
 
 
@@ -10,8 +11,7 @@ const form=document.getElementById("guessForm")
 const input=document.getElementById("guessInput")
 const hint=document.getElementById("hint")
 
-form.addEventListener("submit", function (e) {
-    e.preventDefault();
+function func(){
 
     const n = Number(input.value);
     guessCount++;
@@ -26,10 +26,10 @@ form.addEventListener("submit", function (e) {
         alert("太小了，請再試一次。");
     }
     else {
-        alert(`恭喜你，猜對了！答案是 ${ans}，你總共猜了 ${guessCount} 次。`);
+        alert("恭喜你，猜對了！答案是 "+ ans+ "你總共猜了" + guessCount + "次。");
         ans = newAns();
         guessCount = 0;
         
     }
-});
+};
 
