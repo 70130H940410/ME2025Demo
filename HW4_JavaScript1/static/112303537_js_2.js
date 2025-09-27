@@ -7,7 +7,7 @@ for(let i=0;i<=9;i++){
 
 document.write('<button onclick="press(\'clear\')">clear</button><br>');
 
-let ops = ["+", "-", "*", "/", "(", ")", "="];
+let ops = ["+", "-", "*", "/", "(", ")", "=","←"];
 for (let op of ops) {
   document.write('<button onclick="press(\''+op+'\')">' + op+ '</button>');
 }
@@ -26,6 +26,9 @@ function press(valueInput){
       alert(displayOnScreen.value + " = " + ans);
       displayOnScreen.value = ans;
     
+  }
+  else if (valueInput === "←") {
+    displayOnScreen.value = displayOnScreen.value.slice(0, -1);
   }
   else{
     displayOnScreen.value = displayOnScreen.value + valueInput;
