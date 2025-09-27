@@ -3,8 +3,9 @@ function newAns() {
 }
 
 let ans=newAns();
-console.log(ans)
+console.log(ans);
 let guessCount=0;
+
 
 
 const form=document.getElementById("guessForm")
@@ -16,6 +17,7 @@ function func(){
     const n = Number(input.value);
     guessCount++;
 
+    
     
 
     if (n > ans) {
