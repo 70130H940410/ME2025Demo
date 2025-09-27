@@ -18,7 +18,6 @@ function func(){
 
     
 
-
     if (n > ans) {
         alert("太大了，請再試一次。");
     }
@@ -29,6 +28,7 @@ function func(){
         alert("恭喜你，猜對了！答案是 "+ ans+ "你總共猜了" + guessCount + "次。");
         ans = newAns();
         guessCount = 0;
+        form.submit();
         
     }
 };
