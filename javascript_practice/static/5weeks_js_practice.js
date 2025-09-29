@@ -20,13 +20,23 @@ div_qry.style.backgroundColor='purple';
 div_qryA[1].style.backgroundColor='red';
 
 div_byid.classList.add('test');
-div_byid.setAttribute('onclick','alert("hi")');
+//div_byid.setAttribute('onclick','alert("hi")');
 //
 
 let new_element = document.createElement('input');
 new_element.type= 'button';
 new_element.value= 'create by js';
 div_byid.appendChild(new_element);
-
 //
-div_byid.addEventListener('click',alert)
+
+div_byid.addEventListener('click',()=>{alert('hi')})
+div_byid.addEventListener('mouseenter',()=>{alert('enter')},{once:true})
+//
+
+let num=0;
+function counting(){
+    num++;
+    new_element.value = num;
+}
+let start = setInterval(counting,1000);
+
