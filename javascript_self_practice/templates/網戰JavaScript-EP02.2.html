@@ -6,13 +6,59 @@
     <title>徹底了解dom關係鍊</title>
 </head>
 <body style="text-align: center;">
-   <h1>js dom各種寫法</h1> 
-   <h2>範例一:按下按鈕顯示訊息</h2>
+    <br>
+    <h1>js dom各種寫法</h1> <br>
+    <h2>範例一:按下按鈕顯示訊息</h2><br>
 
-   <input type="button" value="訊息1">
-   <input type="button" value="訊息2">
-   <input type="button" value="訊息3">
-   <input type="button" value="訊息4">
-   <input type="button" value="訊息5">
+    <input type="button" value="訊息1" onclick="message()">
+    <input type="button" value="訊息2" id="btn2">
+    <input type="button" value="訊息3" id="btn3">
+    <input type="button" value="訊息4" id="btn4">
+    <input type="button" value="訊息5" id="btn5">
+    <br>
+    <p id="display"></p><br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <hr>
+
+    <script>
+
+        //第一種寫法-Functions 分配法
+        function message(){
+            document.getElementById("display").innerHTML='第一種方法';
+        }
+
+        //第二種寫法-物件分配法
+        document.getElementById('btn2').addEventListener("click",function(){
+            document.getElementById("display").innerHTML='第二種方法';
+        })
+
+        //第三種寫法-物件分配法 函式精簡版
+        document.getElementById('btn3').addEventListener("click",()=>{
+            document.getElementById("display").innerHTML='第三種方法';
+        })
+
+
+        //第四種寫法-物件分配法 更精簡版 (DOM關係鏈)
+        //onclick是一種屬性，會有覆寫的問題{因為 onclick 是屬性，所以只能存一個函式!!!!!}
+        document.getElementById('btn4').onclick =() =>{
+            document.getElementById("display").innerHTML='第四種方法';
+        }
+
+        //第五種寫法-變數精簡版
+        const btn5 =document.getElementById('btn5');
+        const show =document.getElementById("display");
+
+        function showFunction(){
+            show.innerHTML='第五種方法';
+        }
+
+        btn5.addEventListener('click',showFunction);
+
+
+    </script>
+
 </body>
 </html>
