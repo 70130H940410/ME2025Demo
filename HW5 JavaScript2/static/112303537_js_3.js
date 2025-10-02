@@ -12,15 +12,32 @@ const form=document.getElementById("guessForm")
 const input=document.getElementById("guessInput")
 const hint=document.getElementById("hint")
 
+/*計時器
+
+let time=0;
+
+setInterval(timeCount, 1000)
+
+function timeCount(){
+    time++;
+    console.log(time)
+}    
+    */
+
+
+
+
 
 
 function func(){
 
     const n = Number(input.value);
+    const today=new Date();
     guessCount++;
 
-    
 
+
+    
    
 
     if (n > ans) {
@@ -32,7 +49,7 @@ function func(){
         input.value = "";
     }
     else {
-        alert("恭喜你，猜對了！答案是 "+ ans+ "你總共猜了" + guessCount + "次。");
+        alert("恭喜你，猜對了！答案是 "+ ans+ "你總共猜了" + guessCount + "次，花了");
         ans = newAns();
         guessCount = 0;
         form.submit();
