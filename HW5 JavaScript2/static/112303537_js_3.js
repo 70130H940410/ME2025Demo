@@ -31,7 +31,7 @@ function timeCount(){
 function timeCount(){
     time=time+0.01;
     //console.log(time.toFixed(2));
-    document.getElementById("timeID").innerHTML ="本次遊戲花了"+time.toFixed(2)+"s";
+    document.getElementById("timeID").innerHTML ="本次遊戲花了:"+time.toFixed(2)+"s";
 } 
 
 
@@ -59,9 +59,11 @@ function func(){
     else {
         alert("恭喜你，猜對了！答案是 "+ ans+ "，你總共猜了" + guessCount + "次，花了"+time.toFixed(2)+"s");
         ans = newAns();
+        console.log(ans);
         guessCount = 0;
         //form.submit();
         clearInterval(stopTimeCount);
+        time=0;
         
     }
 };
