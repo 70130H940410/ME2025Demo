@@ -5,6 +5,10 @@ function newAns() {
 let ans=newAns();
 console.log(ans);
 let guessCount=0;
+let time=0;
+let stopTimeCount= 0;
+
+
 
 
 
@@ -24,20 +28,24 @@ function timeCount(){
 }    
     */
 
-
-
+function timeCount(){
+    time=time+0.01;
+    //console.log(time.toFixed(2));
+    document.getElementById("timeID").innerHTML ="本次遊戲花了"+time.toFixed(2)+"s";
+} 
 
 
 
 function func(){
 
     const n = Number(input.value);
-    const today=new Date();
+    let today=new Date();
     guessCount++;
 
-
-
-    
+    //只有在猜第一次時會觸發計時器
+    if(guessCount==1){ 
+        stopTimeCount=setInterval(timeCount, 10);
+    }
    
 
     if (n > ans) {
@@ -49,10 +57,11 @@ function func(){
         input.value = "";
     }
     else {
-        alert("恭喜你，猜對了！答案是 "+ ans+ "你總共猜了" + guessCount + "次，花了");
+        alert("恭喜你，猜對了！答案是 "+ ans+ "，你總共猜了" + guessCount + "次，花了"+time.toFixed(2)+"s");
         ans = newAns();
         guessCount = 0;
-        form.submit();
+        //form.submit();
+        clearInterval(stopTimeCount);
         
     }
 };
