@@ -19,16 +19,16 @@ function func(){
     const n = Number(input.value);
     guessCount++;
 
-    document.getElementById("display").innerHTML = "這是 onclick 顯示的文字！";
+    
 
    
 
     if (n > ans) {
-        alert("太大了，請再試一次。");
+        document.getElementById("display").innerHTML = "太大了，請再試一次。";
         input.value = "";
     }
     else if (n < ans) {
-        alert("太小了，請再試一次。");
+        document.getElementById("display").innerHTML = "太小了，請再試一次。";
         input.value = "";
     }
     else {
@@ -39,4 +39,6 @@ function func(){
         
     }
 };
+
+
 

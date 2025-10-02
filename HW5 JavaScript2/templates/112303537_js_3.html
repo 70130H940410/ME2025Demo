@@ -2,11 +2,17 @@
 <html>
     <head>
         <title>猜數字</title>
+        <meta charset="UTF-8">
         <script src="../static/112303537_js_3.js" defer></script>
     </head>
     <body>
         <h1>猜數字遊戲</h1>
-        <h4><p id="display">請輸入一個介於1到100的隨機整數 </p></h4><p id="display"></p>請輸入一個介於1到100的隨機整數 </p>
+
+        <p>
+            <h4 style="display:inline;">請輸入一個介於1到100的隨機整數: </h4>
+            <h4 id="display" style="display:inline;"></h4>
+        </p>
+
         <form action="" method="" id="guessForm" onsubmit="return false;">
 
             <input type="number" name="input" id="guessInput" placeholder="輸入你要猜的數字" min="0" max="100" step="1" required>
