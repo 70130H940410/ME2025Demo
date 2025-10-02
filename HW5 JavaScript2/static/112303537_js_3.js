@@ -39,7 +39,6 @@ function timeCount(){
 function func(){
 
     const n = Number(input.value);
-    let today=new Date();
     guessCount++;
 
     //只有在猜第一次時會觸發計時器
@@ -60,10 +59,18 @@ function func(){
         alert("恭喜你，猜對了！答案是 "+ ans+ "，你總共猜了" + guessCount + "次，花了"+time.toFixed(2)+"s");
         ans = newAns();
         console.log(ans);
-        guessCount = 0;
         //form.submit();
+
+
+        const li = document.createElement("li");
+        const now = new Date().toLocaleTimeString();
+        li.textContent = "猜了"+guessCount+"次，耗時"+time.toFixed(2)+ "秒"+now;
+        document.getElementById("history").appendChild(li);
+
+        guessCount = 0;
         clearInterval(stopTimeCount);
         time=0;
+
         
     }
 };
