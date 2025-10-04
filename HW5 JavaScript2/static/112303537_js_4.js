@@ -256,6 +256,8 @@ document.body.appendChild(checkoutBtn);
 
 checkoutBtn.addEventListener('click', () => {
     const total = Number(document.getElementById('totalPrice').textContent);
+    //按下時total金額<=0，不作動作
+    if (total <= 0) return; 
 
     const lines = [];
 
@@ -275,6 +277,7 @@ checkoutBtn.addEventListener('click', () => {
 
     });
 
+    //這裡語法還要再研究一下
     alert(`結帳明細：\n${lines.join('\n')}\n----------------\nTotal：${total}`);
 
     // 重置
