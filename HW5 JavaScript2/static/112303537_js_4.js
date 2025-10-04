@@ -282,9 +282,6 @@ checkoutBtn.addEventListener('click', () => {
         qtyInput.max = stock;// 庫存上限跟著變
 
 
-        //取消勾選並更新該列小計
-        chk.checked = false;
-        updateRowSubtotal(row);
 
         //重置table中數量
         /*.disable用法
@@ -301,6 +298,10 @@ checkoutBtn.addEventListener('click', () => {
             minusBtn.disabled = true;
             addBtn.disabled = true;
         }
+
+        //取消勾選並更新該列小計
+        chk.checked = false;
+        updateRowSubtotal(row);
 
     });
 
