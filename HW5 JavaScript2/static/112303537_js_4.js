@@ -142,3 +142,30 @@ function updateTotal() {
     });
     document.getElementById('totalPrice').textContent = total;
 }
+
+// (4) 同步全選狀態（全部勾選 → 全選打勾；有任一未勾 → 全選取消）
+function syncCheckAll() {
+  let allChecked = true; 
+
+  itemChecks.forEach(c => {
+    if (!c.checked) {
+      allChecked = false; // 有任何一個沒勾，就改成 false
+    }
+  });
+
+  checkAll.checked = allChecked;
+}
+
+// (5) 全選：勾/取消 → 全部項目跟著改，並重算
+checkAll.addEventListener('change', () => {
+    itemChecks.forEach(c => (c.checked = checkAll.checked));
+    updateTotal();
+});
+
+// (6) 個別 checkbox：每次點擊 → 同步全選狀態 & 重算
+itemChecks.forEach(c => {
+    c.addEventListener('change', () => {
+        syncCheckAll();
+        updateTotal();
+    });
+});
