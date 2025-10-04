@@ -248,6 +248,12 @@ table.querySelectorAll('tr').forEach((row, idx) => {
     });
 });
 
+//----------------------------------------------------------- 結帳按鈕 ----------------------------------------------------------- 
+//設定結帳按鈕
+const checkoutBtn = document.createElement('button');
+checkoutBtn.textContent = '結帳';
+document.body.appendChild(checkoutBtn);
+
 
 
 
