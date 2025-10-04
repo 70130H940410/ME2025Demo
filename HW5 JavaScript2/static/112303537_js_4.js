@@ -195,3 +195,59 @@ function updateRowSubtotal(row) {
     const qty = Number(qtyInput.value);
     row.querySelector(".subtotal").textContent = price * qty;
 }
+
+
+
+// 綁定每一列的 + / - 按鈕
+table.querySelectorAll('tr').forEach((row, idx) => {
+    if (idx === 0) return; // 略過表頭列
+
+    const btnMinus = row.querySelector('.minus');
+    const btnAdd   = row.querySelector('.add');
+    const qtyInput = row.querySelector('.qty');
+
+    const stockMax = Number(qtyInput.getAttribute('max')); //庫存上限
+
+    // btnAdd
+    btnAdd.addEventListener('click', () => {
+        let v = Number(qtyInput.value);
+        if (v < stockMax) {
+        qtyInput.value = v + 1;
+        updateRowSubtotal(row);
+        updateTotal();
+        }
+    });
+
+    // btnMinus
+    btnMinus.addEventListener('click', () => {
+        let v = Number(qtyInput.value);
+        if (v > 1) {
+        qtyInput.value = v - 1;
+        updateRowSubtotal(row);
+        updateTotal();
+        }
+    });
+    });
+
+
+
+    // 解決input中上下鍵無法更新該raw的總計的計問題
+    table.querySelectorAll('.qty').forEach(input => {
+    input.addEventListener('input', () => {
+        const row = input.closest('tr');
+        const stockMax = Number(input.getAttribute('max'));
+        let v = Number(input.value);
+
+        // 限制數量範圍
+        if (v < 1) {v = 1};
+        if (v > stockMax) {v = stockMax};
+
+        input.value = v; // 修正超出範圍的值
+        updateRowSubtotal(row); // 更新更新該raw的總計
+        updateTotal();          // 更新總金額
+    });
+});
+
+
+
+
