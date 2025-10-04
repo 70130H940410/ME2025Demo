@@ -6,6 +6,7 @@ display: flex;可以讓這個框與table的寬一樣，
 不然一開始都設定600px，還是會被結帳鈕的設定給蓋掉
 3.table置中
 4.水波特效
+5.客製化結帳彈窗(這裡有把js中的alert先改成備註)
 */
 
 body {
@@ -203,4 +204,56 @@ hr {
     opacity: 0;
     transform: translate(-50%, -50%) scale(1.8);
   }
+}
+
+/* --- 客製化結帳彈窗 --- */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 25px 35px;
+  width: 340px;
+  box-shadow: 0 4px 15px rgba(0,185,255,0.25);
+  text-align: left;
+  font-family: "微軟正黑體";
+  color: #004b6b;
+}
+
+.modal-content h3 {
+  text-align: center;
+  color: #00b9ff;
+  margin-bottom: 15px;
+}
+
+.modal-content button {
+  display: block;
+  margin: 15px auto 0;
+  background: linear-gradient(90deg, #00b9ff, #9be8ff);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,185,255,0.3);
+  transition: 0.3s;
+}
+
+.modal-content button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(0,185,255,0.5);
 }

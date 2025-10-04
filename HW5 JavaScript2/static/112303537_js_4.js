@@ -313,9 +313,25 @@ checkoutBtn.addEventListener('click', () => {
         updateRowSubtotal(row);
 
     });
-
+/*就的alert
     //這裡語法還要再研究一下
-    alert(`結帳明細：\n${lines.join('\n')}\n----------------\nTotal：${total}`);
+    alert(`結帳明細：\n${lines.join('\n')}\n----------------\nTotal：${total}`);  */
+
+    //配合css新增的模組
+    const modal = document.getElementById('checkoutModal');
+    const detailsBox = document.getElementById('checkoutDetails');
+
+    detailsBox.innerHTML = `
+    <p>${lines.join('<br>')}</p>
+    <hr>
+    <p><strong>Total：</strong> ${total}</p>
+    `;
+
+    modal.classList.remove('hidden');
+
+    document.getElementById('closeModal').onclick = () => {
+    modal.classList.add('hidden');
+    };
 
     // 重置
     checkAll.checked = false;
