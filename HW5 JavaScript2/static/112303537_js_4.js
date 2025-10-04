@@ -254,6 +254,36 @@ const checkoutBtn = document.createElement('button');
 checkoutBtn.textContent = '結帳';
 document.body.appendChild(checkoutBtn);
 
+checkoutBtn.addEventListener('click', () => {
+    const total = Number(document.getElementById('totalPrice').textContent);
+
+    const lines = [];
+
+    itemChecks.forEach(chk => {
+        if (!chk.checked) return;
+
+        const row = chk.closest('tr');
+        const name = row.children[1].textContent.trim();
+        const price = Number(row.children[3].textContent);
+        const qtyInput = row.querySelector('.qty');
+        const minusBtn = row.querySelector('.minus');
+        const addBtn   = row.querySelector('.add');
+
+        const buyQty = Number(qtyInput.value);
+        const sub = price * buyQty;
+        lines.push(`${name}  x ${buyQty}  = ${sub}`);
+
+    });
+
+    alert(`結帳明細：\n${lines.join('\n')}\n----------------\nTotal：${total}`);
+
+    // 重置
+    checkAll.checked = false;
+    updateTotal();
+ 
+
+});
+
 
 
 
