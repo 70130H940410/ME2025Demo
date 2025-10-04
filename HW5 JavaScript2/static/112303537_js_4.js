@@ -58,7 +58,6 @@ products.forEach(p => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
         <td><input type="checkbox" class="check_item"></td>
-        <tr>
         <td class="product-cell">
             <div class="product-info"> 
                 <div class="img-wrapper">
