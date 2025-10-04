@@ -7,6 +7,8 @@ display: flex;可以讓這個框與table的寬一樣，
 3.table置中
 4.水波特效
 5.客製化結帳彈窗(這裡有把js中的alert先改成備註)
+6.商品圖片樣式修改
+7.圖片 Hover 出現 Peko! 特效
 */
 
 body {
@@ -256,4 +258,73 @@ hr {
 .modal-content button:hover {
   transform: scale(1.05);
   box-shadow: 0 0 12px rgba(0,185,255,0.5);
+}
+
+/* --- 商品圖片樣式 --- */
+
+.product-info{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  justify-content:flex-start;
+}
+
+.product-name{
+  font-size:15px;
+  color:#004b6b;
+  font-weight:600;
+  line-height:1.3;
+  text-align:left;
+}
+
+.product-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 5px;
+  box-shadow: 0 0 10px rgba(0,185,255,0.25);
+  transition: 0.3s;
+}
+
+.product-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0,185,255,0.45);
+}
+
+
+/* ========== 🐰✨ 圖片 Hover 出現 Peko! 特效 ========== */
+.img-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.peko-float {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #52b6ff;
+  text-shadow: 0 0 10px rgba(82, 182, 255, 0.8),
+               0 0 20px rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+  transition: all 0.6s ease;
+  animation: none;
+}
+
+/* 滑鼠移上圖片時浮出 ✨Peko! */
+.img-wrapper:hover .peko-float {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-10px);
+  animation: sparkle 1.2s ease-in-out infinite alternate;
+}
+
+/* ✨ 閃爍動畫 */
+@keyframes sparkle {
+  0% { text-shadow: 0 0 6px rgba(255,255,255,0.8); transform: translateY(-10px) scale(1); }
+  50% { text-shadow: 0 0 20px rgba(82,182,255,1); transform: translateY(-14px) scale(1.05); }
+  100% { text-shadow: 0 0 10px rgba(255,255,255,0.8); transform: translateY(-10px) scale(1); }
 }

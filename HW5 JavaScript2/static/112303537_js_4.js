@@ -5,10 +5,31 @@ table.border = "1";
 table.width = "600px";
 
 // 模擬商品資料
-const products = [
+/*預設商品const products = [
     { name: "BENQ 螢幕", stock: 18, price: 5698 },
     { name: "3M 無痕掛勾", stock: 89, price: 179 },
     { name: "DJI MINI 4 Pro", stock: 23, price: 31969 }
+];*/
+//路徑記得檢查
+const products = [
+    {
+        name: "Art Selection - 兎田ぺこら",
+        stock: 15,
+        price: 110,
+        img: "../img/holo_Artselection_banner_Pekora_2_1024x1024.webp"
+    },
+    {
+        name: "活動6周年記念 - 兎田ぺこら",
+        stock: 10,
+        price: 195,
+        img: "../img/holo_UsadaPekora_6th_banner_JP_250711_ol_2_1024x1024.webp"
+    },
+    {
+        name: "hololive friends - 兎田ぺこら 私服衣裝",
+        stock: 25,
+        price: 320,
+        img: "../img/hololivefriends_vol.13_top_UsadaPekoraCasualOutfit_1024x1024.webp"
+    }
 ];
 
 // 建立第一raw
@@ -32,11 +53,21 @@ products → 一個陣列（array），裡面有多個商品。
 .forEach(...) → 陣列的方法，會依序「取出每一個元素」。
 p => { ... } → 箭頭函式，表示「每取出一個元素，就把它暫時放進變數 p」。
 */
+/*<td>${p.name}</td>修改，可加入圖片*/
 products.forEach(p => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
         <td><input type="checkbox" class="check_item"></td>
-        <td>${p.name}</td>
+        <tr>
+        <td class="product-cell">
+            <div class="product-info"> 
+                <div class="img-wrapper">
+                    <img src="${p.img}" alt="${p.name}" class="product-img">
+                    <span class="peko-float">✨ Peko!</span>
+                </div>
+                <div class="product-name">${p.name}</div> 
+            </div>
+        </td>
         <td>${p.stock}</td>
         <td>${p.price}</td>
         <td>
