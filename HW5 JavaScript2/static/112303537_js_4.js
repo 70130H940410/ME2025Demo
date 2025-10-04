@@ -343,7 +343,8 @@ checkoutBtn.addEventListener('click', () => {
         updateRowSubtotal(row);
 
     });
-/*就的alert
+    
+    /*舊的alert
     //這裡語法還要再研究一下
     alert(`結帳明細：\n${lines.join('\n')}\n----------------\nTotal：${total}`);  */
 
