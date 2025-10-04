@@ -3,6 +3,13 @@ const table = document.createElement("table");
 table.border = "1";
 table.width = "600px";
 
+// 模擬商品資料
+const products = [
+    { name: "BENQ 螢幕", stock: 18, price: 5698 },
+    { name: "3M 無痕掛勾", stock: 89, price: 179 },
+    { name: "DJI MINI 4 Pro", stock: 23, price: 31969 }
+];
+
 // 建立第一raw
 /*觀念
 反引號 ` 是現代 JavaScript 處理字串的「升級版」寫法。
@@ -40,6 +47,9 @@ products.forEach(p => {
     `;
   table.appendChild(tr);
 });
+
+// 把整個表格加進畫面
+document.getElementById("container").appendChild(table);
 
 
 
