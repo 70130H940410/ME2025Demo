@@ -1,0 +1,206 @@
+/* === 🌈 Hololive Style 購物車 === */
+/*這裡css直接用gpt生成並做調整
+1.以hololive網頁顏色為基準
+2.總計金額與結帳的狀態:
+display: flex;可以讓這個框與table的寬一樣，
+不然一開始都設定600px，還是會被結帳鈕的設定給蓋掉
+3.table置中
+4.水波特效
+*/
+
+body {
+  background: linear-gradient(135deg, #e6f7ff 0%, #ffffff 100%);
+  font-family: "微軟正黑體", "Poppins", sans-serif;
+  color: #333;
+  margin: 40px;
+  text-align: center;
+}
+
+/* --- 表格樣式 --- */
+table {
+  border-collapse: collapse;
+  width: 600px;
+  background-color: #ffffff;
+  box-shadow: 0 0 12px rgba(0, 185, 255, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto; /* 置中 */
+}
+
+th, td {
+  border: 1px solid #cce7ff;
+  text-align: center;
+  padding: 10px;
+  font-size: 15px;
+}
+
+th {
+  background-color: #9be8ff;
+  color: #003d5b;
+  letter-spacing: 1px;
+}
+
+/* --- 數量控制區 --- */
+td:nth-child(5) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+/* --- 數量控制按鈕（等寬對齊） --- */
+button.add, button.minus {
+  width: 38px;
+  height: 38px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hololive 主題色 */
+button.add {
+  background-color: #00b9ff;   /* Aqua 藍 */
+}
+
+button.minus {
+  background-color: #ff7ba3;   /* Miko 粉 */
+}
+
+button.add:hover {
+  background-color: #0090cc;
+  box-shadow: 0 0 10px rgba(0,185,255,0.4);
+}
+
+button.minus:hover {
+  background-color: #ff4f8b;
+  box-shadow: 0 0 10px rgba(255,123,163,0.4);
+}
+
+/* --- 數量輸入框 --- */
+.qty {
+  width: 55px;
+  height: 32px;
+  text-align: center;
+  font-size: 16px;
+  border: 1px solid #a8d8ff;
+  border-radius: 4px;
+  padding: 2px;
+  transition: 0.2s;
+}
+
+.qty:focus {
+  outline: none;
+  border-color: #00b9ff;
+  box-shadow: 0 0 4px #9be8ff;
+}
+
+/* --- hover 效果 --- */
+tr:hover td {
+  background-color: #f0fbff;
+}
+
+/* --- 分隔線（柔和漸層） --- */
+hr {
+  width: 600px;  /* 跟表格寬度一致 */
+  height: 2px;
+  border: none;
+  margin: 25px auto;
+  background: linear-gradient(
+    90deg,
+    rgba(0,185,255,0) 0%,
+    rgba(0,185,255,0.25) 50%,
+    rgba(0,185,255,0) 100%
+  );
+  border-radius: 2px;
+}
+
+/* --- 總計金額 + 結帳按鈕橫向排列 --- */
+.total-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: fit-content;  /* 自動匹配內容寬度 */
+  min-width: 600px;    /* 與表格一致 */
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #f5fcff;
+  border: 1px solid #cce7ff;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,185,255,0.15);
+}
+
+.total-area h3 {
+  color: #007cb8;
+  font-size: 18px;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* --- 結帳按鈕 (含水波特效) --- */
+.total-area button {
+  position: relative;
+  overflow: hidden; /* 限制漣漪在按鈕範圍內 */
+  padding: 10px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #00b9ff, #9be8ff);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 185, 255, 0.3);
+  transition: 0.3s;
+}
+
+.total-area button:hover {
+  background: linear-gradient(90deg, #0090cc, #7ad3ff);
+  transform: scale(1.03);
+}
+
+/* 💧 Hololive Aqua 水波動畫 */
+.total-area button::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(0, 185, 255, 0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: width 0.6s ease-out, height 0.6s ease-out, opacity 0.8s ease-out;
+}
+
+/* 滑鼠 hover 時啟動水波 */
+.total-area button:hover::after {
+  width: 250%;
+  height: 250%;
+  opacity: 0;
+  animation: rippleGlow 0.8s ease-out;
+}
+
+/* 💫 水波亮度動畫 */
+@keyframes rippleGlow {
+  0% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.8);
+  }
+}

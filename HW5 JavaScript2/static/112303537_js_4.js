@@ -125,9 +125,18 @@ let html2 = `
 const checkAll = table.querySelector("#check_all");
 const itemChecks = table.querySelectorAll('.check_item');
 
-// (2) table下方插入一個總計區塊
-const totalDiv = document.createElement('p');
+// (2) table下方插入一個總計區塊--------為了css修改後table下方插入一個總計 + 結帳區塊
+/*舊程式const totalDiv = document.createElement('p');
 totalDiv.innerHTML = `<h3>總計金額：<span id="totalPrice">0</span></h3>`;
+document.body.appendChild(totalDiv); */
+const totalDiv = document.createElement('div');
+totalDiv.classList.add('total-area'); // 加上class要給CSS排版
+const totalText = document.createElement('h3');
+totalText.innerHTML = `總計金額：<span id="totalPrice">0</span>`;
+const checkoutBtn = document.createElement('button');//結帳按鈕改到這邊來
+checkoutBtn.textContent = '結帳';
+totalDiv.appendChild(totalText);
+totalDiv.appendChild(checkoutBtn);
 document.body.appendChild(totalDiv);
 
 // (3) 重算總金額，加總打勾的金額
@@ -250,9 +259,9 @@ table.querySelectorAll('tr').forEach((row, idx) => {
 
 //----------------------------------------------------------- 結帳按鈕 ----------------------------------------------------------- 
 //設定結帳按鈕
-const checkoutBtn = document.createElement('button');
+/*const checkoutBtn = document.createElement('button');
 checkoutBtn.textContent = '結帳';
-document.body.appendChild(checkoutBtn);
+document.body.appendChild(checkoutBtn);這裡為了加css移動到前面*/
 
 checkoutBtn.addEventListener('click', () => {
     const total = Number(document.getElementById('totalPrice').textContent);
