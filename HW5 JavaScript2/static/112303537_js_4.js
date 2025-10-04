@@ -169,3 +169,29 @@ itemChecks.forEach(c => {
         updateTotal();
     });
 });
+
+
+
+//----------------------------------------------------------- 加減按鈕：更新數量、小計、總計 ----------------------------------------------------------- 
+
+// 工具：更新某一列的計算 (= 單價*數量)
+/* 有關children
+<tr>
+  <td><input type="checkbox" class="check_item"></td>   <!-- children[0] -->
+  <td>BENQ 螢幕</td>                                  <!-- children[1] -->
+  <td>18</td>                                         <!-- children[2] -->
+  <td>5698</td>                                       <!-- children[3] -->
+  <td>                                                <!-- children[4] -->
+    <button class="minus">-</button>
+    <input type="number" class="qty" value="1" min="1" max="18">
+    <button class="add">+</button>
+  </td>
+  <td class="subtotal">5698</td>                      <!-- children[5] -->
+</tr>
+*/
+function updateRowSubtotal(row) {
+    const price = Number(row.children[3].textContent); // 第4欄是單價
+    const qtyInput = row.querySelector('.qty');
+    const qty = Number(qtyInput.value);
+    row.querySelector(".subtotal").textContent = price * qty;
+}
