@@ -275,13 +275,16 @@ checkoutBtn.addEventListener('click', () => {
         const sub = price * buyQty;
         lines.push(`${name}  x ${buyQty}  = ${sub}`);
 
-
-
         // 庫存會減少對應數量
         let stock = Number(row.children[2].textContent);
         stock = Math.max(0, stock - buyQty);
         row.children[2].textContent = stock;     // 顯示新庫存
         qtyInput.max = stock;                    // 庫存上限跟著變
+
+
+        //取消勾選並更新該列小計
+        chk.checked = false;
+        updateRowSubtotal(row);
 
     });
 
