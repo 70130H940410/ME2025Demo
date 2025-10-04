@@ -278,13 +278,29 @@ checkoutBtn.addEventListener('click', () => {
         // 庫存會減少對應數量
         let stock = Number(row.children[2].textContent);
         stock = Math.max(0, stock - buyQty);
-        row.children[2].textContent = stock;     // 顯示新庫存
-        qtyInput.max = stock;                    // 庫存上限跟著變
+        row.children[2].textContent = stock;// 顯示新庫存
+        qtyInput.max = stock;// 庫存上限跟著變
 
 
         //取消勾選並更新該列小計
         chk.checked = false;
         updateRowSubtotal(row);
+
+        //重置table中數量
+        /*.disable用法
+        .disabled = true → 元件被鎖住不能用；
+        .disabled = false → 元件恢復可操作。*/ 
+        if (stock > 0) {
+            qtyInput.value = 1;// 還有庫存 → 數量變 1
+            qtyInput.disabled = false;
+            minusBtn.disabled = false;
+            addBtn.disabled = false;
+        } else {
+            qtyInput.value = 0;// 無庫存 → 數量變 0
+            qtyInput.disabled = true;//不可鎖住操作
+            minusBtn.disabled = true;
+            addBtn.disabled = true;
+        }
 
     });
 
