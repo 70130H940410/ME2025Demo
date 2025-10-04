@@ -1,4 +1,5 @@
-// 建立 <table> 元素
+// -----------------------------------------------------------建立 <table> -----------------------------------------------------------
+//建立 <table>
 const table = document.createElement("table");
 table.border = "1";
 table.width = "600px";
@@ -39,9 +40,9 @@ products.forEach(p => {
         <td>${p.stock}</td>
         <td>${p.price}</td>
         <td>
-        <button class="minus">-</button>
-        <input type="number" class="qty" value="1" min="1" max="${p.stock}">
-        <button class="add">+</button>
+            <button class="minus">-</button>
+            <input type="number" class="qty" value="1" min="1" max="${p.stock}">
+            <button class="add">+</button>
         </td>
         <td class="subtotal">${p.price}</td>
     `;
@@ -113,3 +114,31 @@ let html2 = `
 `;
 
 */
+
+
+//----------------------------------------------------------- checkbox 功能 -----------------------------------------------------------
+
+// (1) 抓節點
+/*注意：getElementsByClassName()查找到的是陣列，需要給予index方能使用特定對象
+注意：querySelector()查找的是「第一個」符合css屬性的元素，如要尋找所有符合元素，要用querySelectorAll()
+*/
+const checkAll = table.querySelector("#check_all");
+const itemChecks = table.querySelectorAll('.check_item');
+
+// (2) table下方插入一個總計區塊
+const totalDiv = document.createElement('p');
+totalDiv.innerHTML = `<h3>總計金額：<span id="totalPrice">0</span></h3>`;
+document.body.appendChild(totalDiv);
+
+// (3) 重算總金額，加總打勾的金額
+function updateTotal() {
+    let total = 0;
+    itemChecks.forEach(chk => {
+        if (chk.checked) {
+        const row = chk.closest('tr');
+        const subtotal = Number(row.querySelector('.subtotal').textContent);
+        total += subtotal;
+        }
+    });
+    document.getElementById('totalPrice').textContent = total;
+}
