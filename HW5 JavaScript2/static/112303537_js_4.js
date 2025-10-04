@@ -175,7 +175,7 @@ itemChecks.forEach(c => {
 //----------------------------------------------------------- 加減按鈕：更新數量、小計、總計 ----------------------------------------------------------- 
 
 // 工具：更新某一列的計算 (= 單價*數量)
-/* 有關children
+/* 有關children概念
 <tr>
   <td><input type="checkbox" class="check_item"></td>   <!-- children[0] -->
   <td>BENQ 螢幕</td>                                  <!-- children[1] -->
@@ -274,6 +274,14 @@ checkoutBtn.addEventListener('click', () => {
         const buyQty = Number(qtyInput.value);
         const sub = price * buyQty;
         lines.push(`${name}  x ${buyQty}  = ${sub}`);
+
+
+
+        // 庫存會減少對應數量
+        let stock = Number(row.children[2].textContent);
+        stock = Math.max(0, stock - buyQty);
+        row.children[2].textContent = stock;     // 顯示新庫存
+        qtyInput.max = stock;                    // 庫存上限跟著變
 
     });
 
