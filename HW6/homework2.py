@@ -135,15 +135,16 @@ def prompt_nonempty(prompt: str) -> str:
 
 
 # ----------------------------------------------------------- (a) 註冊流程：sign_up() -----------------------------------------------------------
+# ----------------------------------------------------------- (a) 註冊流程：sign_up() -----------------------------------------------------------
 def sign_up():
     """
-    註冊流程：
+    註冊流程（已調整：輸入完 Email 立即檢查是否重複）：
     1) 姓名（必填）
-    2) Email（必須 XXX@gmail.com）
-    3) 密碼（需符合上方密碼規則）
-    4) 顯示確認字串 -> Y 儲存 / N 取消
-       - 若 email 已存在 -> 詢問是否更新
-       - 若 email 不存在 -> 直接新增
+    2) Email（必須 XXX@gmail.com）→ 若已存在，立刻詢問是否更新
+       - 回覆 N → 直接返回主選單
+       - 回覆 Y → 進入密碼輸入，最後執行 UPDATE
+    3) 若 Email 不存在 → 進入密碼輸入、最後新增 INSERT
+    4) 仍保留 save ... | Y/N 確認步驟（可視需要移除）
     """
     conn = get_conn()
     cur = conn.cursor()
@@ -151,12 +152,33 @@ def sign_up():
     # (1) 姓名
     name = prompt_nonempty("輸入姓名: ")
 
-    # (2) Email 驗證
+    # (2) Email 驗證 + 立即重複檢查
     while True:
         email = prompt_nonempty("輸入 Email（必須為 XXX@gmail.com）: ")
-        if validate_email(email):
+        if not validate_email(email):
+            print("Email 格式不符，重新輸入。")
+            continue
+
+        # 這裡立刻檢查是否重複
+        cur.execute("SELECT id FROM users WHERE email = ?", (email,))
+        row = cur.fetchone()
+        if row:
+            # 立刻詢問是否更新
+            print("Email 已存在，是否更新此 Email 資訊？(Y/N)")
+            ans = input().strip().upper()
+            if ans == "N":
+                print("已取消，返回主選單。")
+                conn.close()
+                return
+            elif ans == "Y":
+                # 走「更新」路徑，進入密碼輸入
+                break
+            else:
+                print("請輸入 Y 或 N。")
+                continue
+        else:
+            # 不重複 → 走「新增」路徑
             break
-        print("Email 格式不符，重新輸入。")
 
     # (3) 密碼驗證
     while True:
@@ -166,7 +188,7 @@ def sign_up():
             break
         print(msg)
 
-    # (4) 確認是否儲存
+    # (4) 最後確認（保留原有 save 確認習慣）
     print(f"save {name} | {email} | {pw} | Y / N ?")
     confirm = input().strip().upper()
     if confirm != "Y":
@@ -174,21 +196,19 @@ def sign_up():
         conn.close()
         return
 
-    # (5) 寫入 / 更新
+    # (5) 根據是否存在決定 UPDATE 或 INSERT
     cur.execute("SELECT id FROM users WHERE email = ?", (email,))
     row = cur.fetchone()
     if row:
-        print("Email 已存在，是否更新此 Email 資訊？(Y/N)")
-        if input().strip().upper() == "Y":
-            cur.execute(
-                "UPDATE users SET name = ?, password = ? WHERE email = ?",
-                (name, pw, email)
-            )
-            conn.commit()
-            print("✅ 已更新使用者資訊。")
-        else:
-            print("已取消更新。")
+        # 更新既有 email
+        cur.execute(
+            "UPDATE users SET name = ?, password = ? WHERE email = ?",
+            (name, pw, email)
+        )
+        conn.commit()
+        print("✅ 已更新使用者資訊。")
     else:
+        # 新增新使用者
         cur.execute(
             "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
             (name, email, pw)
