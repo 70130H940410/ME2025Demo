@@ -1,7 +1,7 @@
 import sqlite3, os
 
 # --- 固定連線到正確 DB（你的絕對路徑） ---
-DB = r"C:\Users\蔡典儒\Desktop\ME2025Demo\HW6\ID_data.db"
+DB = os.path.join(os.path.dirname(__file__), "ID_data.db")
 if not os.path.exists(DB):
     raise FileNotFoundError(f"❌ 找不到資料庫：{DB}\n請確認檔案路徑正確。")
 print(f"✅ 成功連線資料庫：{DB}")
