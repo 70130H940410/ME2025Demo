@@ -1,0 +1,18 @@
+h2 { margin: 10px 0 12px; }
+
+.grades {
+  width: 100%; border-collapse: collapse; background:#fff; border:1px solid #eee; border-radius:12px; overflow:hidden;
+}
+.grades th, .grades td { padding:12px; border-bottom:1px solid #f0f0f0; text-align:left; }
+.grades thead th { background:#fafafa; font-weight:700; }
+.grades .empty { text-align:center; color:#666; }
+
+.panel {
+  background:#fff; border:1px solid #eee; border-radius:12px; padding:16px; margin-top:18px;
+}
+.form-grid {
+  display:grid; grid-template-columns: 120px 1fr; gap:12px 12px; align-items:center;
+}
+.form-grid input { padding:8px 10px; border:1px solid #ddd; border-radius:8px; }
+.form-inline { display:flex; gap:10px; }
+.form-inline input { flex:1; padding:8px 10px; border:1px solid #ddd; border-radius:8px; }

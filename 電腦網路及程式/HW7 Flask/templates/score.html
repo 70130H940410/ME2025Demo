@@ -1,4 +1,54 @@
-<!-- <!DOCTYPE html>
+{% extends "layout.html" %}
+{% block title %}成績輸入系統{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/score.css">
+{% endblock %}
+
+{% block content %}
+<h2>成績列表（依學號遞增）</h2>
+
+{% if msg %}<p class="msg">{{ msg }}</p>{% endif %}
+
+<table class="grades">
+  <thead>
+    <tr><th>學生姓名</th><th>學號</th><th>成績</th></tr>
+  </thead>
+  <tbody>
+  {% for name, sid, score in grades %}
+    <tr>
+      <td>{{ name }}</td>
+      <td>{{ sid }}</td>
+      <td>{{ score }}</td>
+    </tr>
+  {% else %}
+    <tr><td colspan="3" class="empty">目前沒有資料</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<section class="panel">
+  <h3>新增成績</h3>
+  <form action="{{ url_for('grades_add') }}" method="post" class="form-grid">
+    <label>學生姓名</label>
+    <input name="name" required>
+    <label>學號</label>
+    <input name="student_id" inputmode="numeric" pattern="\d+" required>
+    <label>成績</label>
+    <input name="score" inputmode="numeric" pattern="\d+" required>
+    <button type="submit" class="btn primary full">提交</button>
+</form>
+
+<form action="{{ url_for('grades_delete') }}" method="post" class="form-inline">
+    <input name="delete_student_id" placeholder="輸入學號" inputmode="numeric" pattern="\d+" required>
+    <button type="submit" class="btn danger">刪除</button>
+</form>
+
+{% endblock %}
+
+
+
+<!-- version1
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -54,7 +104,7 @@
 </html>  -->
 
 
-
+<!-- version2 移動到layout
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -88,4 +138,4 @@
     <p>（下一步：在此載入/顯示成績表、提供新增/刪除等功能）</p>
   </main>
 </body>
-</html>
+</html>  -->
