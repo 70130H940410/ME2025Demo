@@ -26,24 +26,36 @@
   </tbody>
 </table>
 
+<!-- 新增成績區塊 -->
 <section class="panel">
   <h3>新增成績</h3>
   <form action="{{ url_for('grades_add') }}" method="post" class="form-grid">
     <label>學生姓名</label>
     <input name="name" required>
+
     <label>學號</label>
     <input name="student_id" inputmode="numeric" pattern="\d+" required>
+
     <label>成績</label>
     <input name="score" inputmode="numeric" pattern="\d+" required>
-    <button type="submit" class="btn primary full">提交</button>
-</form>
 
-<form action="{{ url_for('grades_delete') }}" method="post" class="form-inline">
+    <button type="submit" class="btn primary full">提交</button>
+  </form>
+</section>
+
+<!-- ✅ 新增一條分隔線 -->
+<hr class="divider">
+
+<!-- 刪除成績區塊（獨立） -->
+<section class="panel danger-panel">
+  <h3>刪除學生資料</h3>
+  <form action="{{ url_for('grades_delete') }}" method="post" class="form-inline">
     <input name="delete_student_id" placeholder="輸入學號" inputmode="numeric" pattern="\d+" required>
     <button type="submit" class="btn danger">刪除</button>
-</form>
-
+  </form>
+</section>
 {% endblock %}
+
 
 
 

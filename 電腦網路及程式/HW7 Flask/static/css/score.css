@@ -16,3 +16,19 @@ h2 { margin: 10px 0 12px; }
 .form-grid input { padding:8px 10px; border:1px solid #ddd; border-radius:8px; }
 .form-inline { display:flex; gap:10px; }
 .form-inline input { flex:1; padding:8px 10px; border:1px solid #ddd; border-radius:8px; }
+
+hr.divider {
+  border: none;
+  border-top: 2px solid #ddd;
+  margin: 28px 0;
+}
+
+.danger-panel {
+  border: 1px solid #fee2e2;
+  background: #fff5f5;
+}
+
+.danger-panel h3 {
+  color: #b91c1c;
+}
+
