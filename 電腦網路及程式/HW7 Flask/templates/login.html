@@ -1,12 +1,74 @@
-<!DOCTYPE html>
+<!-- 
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>成績登入介面</title>
+    <link rel="stylesheet" href="/static/login.dvd.css">
+    <script src="/static/js_dvd.js" defer></script>
+    <script src="/static/login_to_score.js" defer></script> -- 新增：處理登入的前端 JS --
+
+    <title>教師登入介面</title>
 </head>
 <body>
-    <h1>login</h1>
-    
+    <div class="login-area">
+            <h1>Login</h1>
+            <div class="login-card">
+                <form action="/login" method="post">   這裡改成真正送出 
+                    <label for="Username">Username:</label>
+                    <input name="username" id="Username">
+                    <label for="Password">Password:</label>
+                    <input name="password" id="Password" type="password">
+                    <button type="submit">登入</button>
+                </form>
+
+                <p id="msg" style="color:crimson; text-align:center;"></p>
+            </div>
+    </div>
+
+    <div class="screen"> <img src="../static/professor.jpg" class="dvd-logo" alt="DVD"> </div>
+
+  
+</body>
+</html>  -->
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>教師登入介面</title>
+  <!-- 改成以 /static/ 開頭，避免 ERR_FILE_NOT_FOUND -->
+  <link rel="stylesheet" href="../static/login.dvd.css">
+</head>
+<body>
+  <div class="login-area">
+    <h1>Login</h1>
+    <div class="login-card">
+      <!-- 表單版：直接 POST 到 /login，不用任何 AJAX -->
+      <form action="/login" method="post">
+        <label for="Username">Username:</label>
+        <input name="username" id="Username" autocomplete="username">
+
+        <label for="Password">Password:</label>
+        <input name="password" id="Password" type="password" autocomplete="current-password">
+
+        <button type="submit">登入</button>
+      </form>
+
+      <!-- 後端帶回的錯誤訊息（用 querystring ?error=...） -->
+      {% if error %}
+      <p style="color:crimson; text-align:center; margin-top:8px;">{{ error }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- 全螢幕的動畫舞台 + 漂浮圖片（會與 .login-card 碰撞反彈） -->
+  <div class="screen">
+    <img src="../static/professor.jpg" class="dvd-logo" alt="DVD">
+  </div>
+
+  <!-- 只載一次動畫腳本 -->
+  <script src="../static/js_dvd.js" defer></script>
 </body>
 </html>

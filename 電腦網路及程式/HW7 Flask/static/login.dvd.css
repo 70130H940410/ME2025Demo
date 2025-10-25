@@ -1,0 +1,196 @@
+/* 全域設定 */
+body {
+  font-family: "Noto Sans TC", Arial, sans-serif;
+  background-color: #f5f7fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* 標題 */
+h1 {
+  color: #ffffff;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+/* 登入表單 */
+form {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+/* 標籤與輸入框 */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 3px rgba(74, 144, 226, 0.5);
+}
+
+/* 按鈕樣式 */
+button {
+  width: 100%;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #357ab7;
+}
+
+
+
+
+body, html {
+  height: 100%;
+  margin: 0;
+  background-color: black;
+  overflow: hidden;
+}
+
+/* 容器：確保影像不被裁切 */
+.screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+/* X 軸來回移動 */
+@keyframes moveX {
+  from { left: 0; }
+  to { left: calc(100% - 120px); }  /* 120px 為圖片寬度 */
+}
+
+/* Y 軸來回移動 */
+@keyframes moveY {
+  from { top: 0; }
+  to { top: calc(100% - 120px); }  /* 同樣減掉高度 */
+}
+
+/* 顏色變化（讓畫面更像 DVD LOGO） */
+@keyframes colorShift {
+  0%   { filter: hue-rotate(0deg) drop-shadow(0 0 15px #fff); }
+  25%  { filter: hue-rotate(90deg) drop-shadow(0 0 15px #ff0); }
+  50%  { filter: hue-rotate(180deg) drop-shadow(0 0 15px #0ff); }
+  75%  { filter: hue-rotate(270deg) drop-shadow(0 0 15px #f0f); }
+  100% { filter: hue-rotate(360deg) drop-shadow(0 0 15px #fff); }
+}
+
+/* 讓黑底動畫佔滿整個視窗，放在最底層 */
+.screen {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+  background: #1fc47f;
+}
+
+/* 讓 Login 標題與表單共享同一條中線 */
+.login-area{
+  position: relative;
+  z-index: 10;
+  width: 480px;              /* 表單最大寬度，視需要可調 */
+  margin: 2vh auto 0;        /* 往上靠一點 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;        /* 標題與表單都水平置中 */
+}
+
+/* 標題置中、與卡片距離 */
+.login-area h1{
+  margin: 0 0 16px;
+  text-align: center;
+}
+
+/* 卡片寬度與居中（如果你有 .login-card 這層） */
+.login-card{
+  width: 100%;
+  background: #fff;
+  padding: 28px 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,.12);
+}
+
+/* ✅ 重點：表單兩欄 Grid，左 label、右 input 對齊 */
+.login-area form{
+  display: grid;
+  grid-template-columns: 130px 1fr;  /* 左欄固定寬，右欄彈性 */
+  column-gap: 14px;
+  row-gap: 14px;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 你原本用 <br> 換行，Grid 不需要 → 直接藏起來避免撐版 */
+.login-area form br{ display: none; }
+
+/* label 靠右貼齊欄線 */
+.login-area form label{
+  justify-self: end;
+  font-weight: 600;
+}
+
+/* input 佔滿右欄寬度 */
+.login-area form input{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 按鈕跨兩欄並置中 */
+.login-area form button{
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 100%;
+  max-width: 320px;           /* 想窄一點就改小 */
+}
+
+/* DVD 圖片外觀（移動由 JS 控制） */
+/* DVD 圖片大小（可再調整） */
+.dvd-logo {
+  position: absolute;
+  width: 110px;         /* ← 圖片寬度（原 120px），想更小再改 */
+  will-change: transform, filter;
+  filter: drop-shadow(0 0 20px rgba(255,255,255,.8));
+  /* 若要保留顏色輪替可打開：animation: colorShift 8s linear infinite; */
+}
+
+/* 顏色變化 */
+@keyframes colorShift {
+  0%   { filter: hue-rotate(0deg) drop-shadow(0 0 15px #fff); }
+  25%  { filter: hue-rotate(90deg) drop-shadow(0 0 15px #ff0); }
+  50%  { filter: hue-rotate(180deg) drop-shadow(0 0 15px #0ff); }
+  75%  { filter: hue-rotate(270deg) drop-shadow(0 0 15px #f0f); }
+  100% { filter: hue-rotate(360deg) drop-shadow(0 0 15px #fff); }
+}

@@ -1,0 +1,91 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入成績介面</title>
+</head>
+<body>
+    <h1>成績登入系統</h1> <br> <br>
+
+    <div>這裡要顯示登入教師</div> <br> <br>
+
+    <button>登出</button> <br> <br>
+
+    <h4>已儲存資料</h4> <br> <br>
+    !--  table[border="1" width="200px"]>tr*5>th*3   --
+    <div id="storedScoreTable"></div>
+
+    <h4>已儲存資料</h4> <br> <br>
+
+    <form action="" method="">
+        <label for="studentName">學生姓名:</label>
+        <input name="input_StudentName" id="studentName"> <br> <br>
+
+        <label for="studentNumber">學號:</label>
+        <input name="input_StudentNumber" id="studentNumber"> <br> <br>
+
+        <label for="studentScore">成績:</label>
+        <input name="input_StudentScore" id="studentScore"> <br> <br>
+
+        <button>提交</button>
+    </form>
+
+    <h4>刪除學生資料</h4> 
+
+    <form action="" method="">
+
+        <label for="deleteStudentNumber">學號:</label>
+        <input name="input_DeleteStudentNumber" id="deleteStudentNumber"> <br> <br>
+
+        <button>刪除</button>
+
+    </form>
+
+    
+
+
+      
+    
+
+    
+    
+</body>
+</html>  -->
+
+
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成績輸入系統</title>
+  <style>
+    body { font-family: "Noto Sans TC", Arial, sans-serif; margin:0; background:#f7f8fb; }
+    header {
+      position: sticky; top:0; background:#fff; border-bottom:1px solid #eee;
+      padding:12px 16px; display:flex; align-items:center; justify-content:space-between;
+    }
+    .brand { font-weight:700; }
+    main { max-width: 960px; margin: 26px auto; padding: 0 16px; }
+    .badge { background:#eef3ff; color:#2b5fd9; padding:4px 10px; border-radius:999px; }
+    button { border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
+    .danger { background:#ef4444; color:#fff; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">成績輸入系統</div>
+    <form action="/logout" method="post">
+      <span class="badge">教師：{{ teacher }}</span>
+      <button class="danger" type="submit" style="margin-left:10px;">登出</button>
+    </form>
+  </header>
+
+  <main>
+    <h2>歡迎，{{ teacher }}</h2>
+    <p>（下一步：在此載入/顯示成績表、提供新增/刪除等功能）</p>
+  </main>
+</body>
+</html>
