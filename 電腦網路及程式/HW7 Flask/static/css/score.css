@@ -32,3 +32,168 @@ hr.divider {
   color: #b91c1c;
 }
 
+.hint { color:#666; margin-top:6px; font-size: 14px; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+.gallery img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.columns {
+  column-count: 4;          /* 螢幕寬時 4 欄 */
+  column-gap: 14px;
+}
+@media (max-width: 1000px){ .columns{ column-count: 3; } }
+@media (max-width: 700px){  .columns{ column-count: 2; } }
+@media (max-width: 460px){  .columns{ column-count: 1; } }
+
+.polaroid {
+  display: inline-block;
+  width: 100%;
+  break-inside: avoid;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 10px 10px 16px;
+  margin: 0 0 14px;
+  box-shadow: 0 10px 20px rgba(0,0,0,.06);
+  transform-origin: center;
+  animation: floaty 6s ease-in-out infinite;
+}
+.polaroid img{
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  display:block;
+  filter: saturate(.85) contrast(1.02);
+  transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
+}
+.polaroid figcaption{
+  margin-top: 8px;
+  font-size: 12px;
+  color:#6b7280;
+  text-align:center;
+}
+
+/* 懸停變彩 & 微放大 */
+.polaroid:hover img{
+  transform: scale(1.05);
+  filter: saturate(1.2) contrast(1.05);
+  box-shadow: 0 10px 24px rgba(0,0,0,.12);
+}
+
+/* 隨機傾斜（用 Jinja 的 loop.cycle 指派） */
+.tilt-l{ transform: rotate(-2.2deg); }
+.tilt-r{ transform: rotate( 2.2deg); }
+.tilt-0{ transform: rotate( 0deg);  }
+
+/* 輕微漂浮動畫 */
+@keyframes floaty{
+  0%,100%{ transform: translateY(0) }
+  50%    { transform: translateY(-4px) }
+}
+
+/* --- 純 CSS 燈箱 --- */
+.lightbox{
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.lightbox:target{ display: flex; }
+.lightbox img{
+  max-width: min(90vw, 1200px);
+  max-height: 88vh;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.lightbox .close{
+  position: fixed; inset: 0;
+}
+
+/* 上傳成功時的小彩帶（可搭配 msg 顯示） */
+.msg{
+  position: relative;
+  overflow: hidden;
+}
+.msg::after{
+  content:"";
+  position:absolute; inset:-30px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,0,90,.6) 0 6px, transparent 7px),
+    radial-gradient(circle at 60% 40%, rgba(0,160,255,.6) 0 6px, transparent 7px),
+    radial-gradient(circle at 80% 70%, rgba(255,200,0,.65) 0 6px, transparent 7px);
+  background-size: 80px 80px;
+  opacity: 0;
+  animation: confetti .9s ease-out forwards;
+}
+@keyframes confetti{ to{ opacity:.9; transform: translateY(-6px); opacity:0; } }
+
+/* === 風滾草滾動帶 === */
+/* 讓風滾草是圓的、像草球；維持你原本的動畫設定 */
+/* 風滾草本體：圓形 + 旋轉 + 上下晃，注意 animation 的第二個改成 bob */
+.tumble{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: var(--size, 96px);
+  height: var(--size, 96px);
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
+  transform-origin: 50% 60%;
+  will-change: transform, bottom;
+
+  box-shadow: 0 10px 18px rgba(0,0,0,.18),
+              inset 0 0 0 6px rgba(205,170,110,.12);
+  filter: saturate(1.05) contrast(1.06) sepia(.08);
+
+  -webkit-mask-image: radial-gradient(circle at 50% 50%,
+      #000 63%, rgba(0,0,0,.9) 70%, rgba(0,0,0,.6) 78%,
+      rgba(0,0,0,.35) 84%, transparent 90%);
+          mask-image: radial-gradient(circle at 50% 50%,
+      #000 63%, rgba(0,0,0,.9) 70%, rgba(0,0,0,.6) 78%,
+      rgba(0,0,0,.35) 84%, transparent 90%);
+
+  /* 旋轉+水平位移（roll），上下浮動改為 bob（動 bottom，不動 transform） */
+  animation:
+    roll var(--dur, 20s) linear infinite,
+    bob 3.2s ease-in-out infinite;
+}
+
+/* 反向滾動用 roll-rtl + bob */
+.tumble.rtl{
+  right: 0; left: auto;
+  animation-name: roll-rtl, bob;
+}
+
+/* === 你原有的 roll / roll-rtl 保留不動 === */
+@keyframes roll {
+  0%   { left: -10%; transform: translateY(var(--y,0)) rotate(0deg); }
+  100% { left: 110%; transform: translateY(var(--y,0)) rotate(1440deg); }
+}
+
+@keyframes roll-rtl {
+  0%   { left: 110%; transform: translateY(var(--y,0)) rotate(0deg); }
+  100% { left: -10%; transform: translateY(var(--y,0)) rotate(-1440deg); }
+}
+
+/* ⭐ 新的上下浮動動畫：改動 bottom，就不會覆蓋 transform */
+@keyframes bob {
+  0%,100% { bottom: 0; }
+  50%     { bottom: 8px; }  /* 想更晃可以加大數值 */
+}
+

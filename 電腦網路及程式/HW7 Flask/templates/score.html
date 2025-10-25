@@ -54,6 +54,48 @@
     <button type="submit" class="btn danger">刪除</button>
   </form>
 </section>
+
+<!-- 上傳照片（獨立區塊） -->
+<section class="panel">
+  <h3>上傳照片</h3>
+  <form action="{{ url_for('upload_photo') }}" method="post"
+        enctype="multipart/form-data" class="form-inline">
+    <input type="file" name="photo" accept="image/*" required>
+    <button type="submit" class="btn primary">上傳</button>
+  </form>
+  <p class="hint">支援 png / jpg / jpeg / gif / webp，最大 5MB。</p>
+</section>
+
+<!-- 照片牆（顯示已上傳圖片） -->
+{% if gallery %}
+<section class="panel">
+  <h3>滾動的照片（風滾草）</h3>
+  <div class="tumble-belt">
+    {% for full in gallery %}
+      <img
+        class="tumble {{ 'rtl' if loop.index is odd }}"
+        src="{{ full }}"
+        alt="upload {{ loop.index }}"
+        style="
+          --dur: {{ 16 + (loop.index % 6)*3 }}s;
+          --size: {{ 70 + (loop.index % 4)*22 }}px;
+          --y: {{ (loop.index % 5)*3 }}px;
+        "
+      >
+    {% endfor %}
+  </div>
+</section>
+{% else %}
+<section class="panel">
+  <h3>滾動的照片（風滾草）</h3>
+  <div class="tumble-belt">
+    <img class="tumble" src="/static/uploads/default.jpg" alt="default">
+  </div>
+</section>
+{% endif %}
+
+
+
 {% endblock %}
 
 
