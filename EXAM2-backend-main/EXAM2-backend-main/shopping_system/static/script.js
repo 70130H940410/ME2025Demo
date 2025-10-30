@@ -15,6 +15,23 @@ const products = [
 
 (function showUsername() {
 // === 顯示登入使用者於導行列，補齊程式碼 ===
+
+// === 新增 === 1) 顯示登入使用者 + 登出回登入頁面
+
+const name = localStorage.getItem('username') || 'Guest';
+  const navDiv = document.querySelector('.quixnav .quixnav-scroll div');
+  if (navDiv) {
+    navDiv.textContent = `👤 使用者：${name}`;
+  }
+  const logoutLink = document.getElementById('logout-link');
+  if (logoutLink) {
+    logoutLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.removeItem('username');
+      window.location.href = 'page_login_.html';
+    });
+  }
+
 })();
 
 
