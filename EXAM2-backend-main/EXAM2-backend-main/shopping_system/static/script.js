@@ -265,9 +265,11 @@ function refreshSummary() {
 }
 
 // 綁定下單按鈕
+// 綁定下單按鈕
 (function bindOrderButton() {
   const btnOrder = document.getElementById('place-order');
   if (!btnOrder) return;
+
   btnOrder.addEventListener('click', () => {
     const tbody = document.querySelector('#products table tbody');
     if (!tbody) return;
@@ -283,13 +285,38 @@ function refreshSummary() {
       const name = tr.children[2]?.textContent?.trim() || '';
       const price = Number(tr.querySelector('[data-price]')?.dataset?.price || 0);
 
-      orderItems.push({ name, price, qty, total: price * qty });
+      orderItems.push({
+        name: name,
+        price: price,
+        qty: qty,
+        total: price * qty
+      });
     });
 
-    if (!orderItems.length) return;
+    if (!orderItems.length) {
+      alert('請先勾選商品並輸入數量');
+      return;
+    }
 
-    console.log('下單內容：', orderItems);
-    alert('下單成功！詳情請見主控台 (Console)。');
+    // 🔥 真的送到 Flask
+    fetch('/submit_order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: orderItems })
+    })
+    .then(res => res.json())
+    .then(data => {
+      // 後端已經幫你組好題目那個格式了
+      alert(data.message);
+      if (data.status === 'success') {
+        // 送完要不要清空可以看你老師有沒有說
+        // 這裡我只更新一下總金額
+        refreshSummary();
+      }
+    })
+    .catch(err => {
+      alert('下單失敗：' + err);
+    });
   });
 })();
 

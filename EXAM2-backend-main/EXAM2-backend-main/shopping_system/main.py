@@ -205,6 +205,70 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('page_login_root'))
 
+@app.route('/submit_order', methods=['POST'])
+def submit_order():
+    # 必須登入
+    if 'username' not in session:
+        return jsonify({"status": "error", "message": "尚未登入，請先登入再下單"})
+
+    data = request.get_json()
+    items = data.get('items', [])
+
+    if not items:
+        return jsonify({"status": "error", "message": "沒有選擇任何商品"})
+
+    # 現在時間（要顯示在 alert，也要寫進 DB）
+    now = datetime.now()
+    date_str = now.strftime("%Y/%m/%d")   # alert 用這個
+    time_str = now.strftime("%H:%M")
+    # 寫 DB 時你原本是 2025-10-29 這種，所以再做一個
+    db_date_str = now.strftime("%Y-%m-%d")
+
+    conn = get_db_connection()
+    if conn is None:
+        return jsonify({"status": "error", "message": "資料庫連線失敗"})
+
+    try:
+        cur = conn.cursor()
+        for item in items:
+            # ⚠ JS 送的是 name，不是 product
+            product = item.get('name')
+            price   = item.get('price')
+            qty     = item.get('qty')
+            total   = item.get('total')
+
+            cur.execute("""
+            INSERT INTO shop_list_table ("Product", "Price", "Number", "Total Price", "Date", "Time")
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (product, price, qty, total, db_date_str, time_str))
+
+
+        conn.commit()
+    except Exception as e:
+        conn.close()
+        return jsonify({"status": "error", "message": f"寫入資料庫失敗: {e}"})
+    conn.close()
+
+    # 組成要給前端的 alert 文字（照題目格式）
+    # 2025/10/29 21:59，已成功下單：
+    # T-Shirt: 25 NT/件 x2 共 50 NT
+    # ...
+    lines = [f"{date_str} {time_str}，已成功下單："]
+    total_all = 0
+    for item in items:
+        name  = item.get('name')
+        price = item.get('price')
+        qty   = item.get('qty')
+        total = item.get('total')
+        total_all += total
+        lines.append(f"{name}: {price} NT/件 x{qty} 共 {total} NT")
+    lines.append(f"此單花費總金額：{total_all} NT")
+
+    return jsonify({
+        "status": "success",
+        "message": "\n".join(lines)
+    })
+
 
 if __name__ == '__main__':
     app.run(debug=True)
