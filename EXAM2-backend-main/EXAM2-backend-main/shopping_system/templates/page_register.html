@@ -9,21 +9,57 @@
     </head>
 
     <body>
-        <h2>註冊帳號</h2>                                
-            <form > <!--請補齊內容-->
-                    <label for="username">帳號:</label>
-                    <input type="text" id="username" name="username" required>
-                    <br>
-                    <label for="password">密碼:</label>
-                    <input type="password" id="password" name="password" required>
-                    <br>
-                    <label for="Email">信箱:</label>
-                    <input type="email" id="email" name="email" required>
-                    <br>
-                    <br>
-                    <button type="submit">註冊</button>
-                </div>
-            </form>
-        </div>
+        <h2>註冊帳號</h2>
+        <!-- ✅ 把「請補齊內容」補成可以被 JS 綁定的 id -->
+        <form id="register-form"> <!--請補齊內容-->
+            <label for="username">帳號:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password">密碼:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <label for="Email">信箱:</label>
+            <input type="email" id="email" name="email" required>
+            <br><br>
+            <button type="submit">註冊</button>
+        </form>
+
+        <!-- ✅ 新增：送到後端 /page_register，成功後回登入頁 -->
+        <script>
+            document.getElementById('register-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const email    = document.getElementById('email').value.trim();
+
+            fetch('/page_register', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password, email })
+            })
+            .then(res => res.text())          // ① 先收「文字」
+            .then(text => {
+                // ② 試著把文字當 JSON 解析
+                try {
+                const data = JSON.parse(text);
+                alert(data.message);
+                if (data.status === 'success') {
+                    // 題目 7：註冊後進入登入頁面
+                    window.location.href = '/page_login';
+                }
+                } catch (err) {
+                // ③ 不是 JSON → 一定是後端把 HTML 錯誤頁丟回來了
+                console.log('後端回來的內容：', text);
+                alert('註冊失敗（後端回的是 HTML，請看 console）：\n' + text.slice(0, 120) + '...');
+                }
+            })
+            .catch(err => {
+                alert('註冊失敗：' + err);
+            });
+            });
+        </script>
     </body>
 </html>
