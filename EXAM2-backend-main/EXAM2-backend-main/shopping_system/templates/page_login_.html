@@ -22,5 +22,38 @@
         <div>
             <p>沒有帳號? <a href="/page_register"> 註冊</a></p> <!--請改變路徑-->
         </div>
+        <script>
+            // 1. 抓你這頁上面那個表單
+            const form = document.querySelector('form');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // 不要用原本的表單送出，改成用 JS
+
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value.trim();
+
+                fetch('/page_login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+                })
+                .then(res => res.json())
+                .then(data => {
+                // 題目 2(2)：查不到 → alert: 帳號或密碼錯誤；查到 → alert: 登入成功
+                alert(data.message);
+                if (data.status === 'success') {
+                    // ✅ 登入成功後跳轉主頁
+                    window.location.href = '/index';
+                }
+                })
+                .catch(err => {
+                alert('登入失敗：' + err);
+                });
+            });
+        </script>
+
+
     </body>
 </html>

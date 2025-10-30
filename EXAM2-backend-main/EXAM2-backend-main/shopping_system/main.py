@@ -173,12 +173,37 @@ def page_login():
             username = data.get('username')
             password = data.get('password')
             result = login_user(username, password)
+
+            # 題目：若資料庫查詢不到，跳出 alert: “帳號或密碼錯誤”；若查詢到，跳出 alert: “登入成功”
             if result["status"] == "success":
                 session['username'] = username
-            return jsonify(result)
+                return jsonify({"status": "success", "message": "登入成功"})
+            else:
+                return jsonify({"status": "error", "message": "帳號或密碼錯誤"})
+
+        # GET → 顯示登入頁
         return render_template('page_login_.html')
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+    
+
+# ==============================
+# 主頁面：顯示登入使用者
+# ==============================
+@app.route('/index')
+def index():
+    # 若 session 裡沒有 username，就退回登入頁
+    if 'username' not in session:
+        return redirect(url_for('page_login_root'))
+    # 有登入 → 帶著使用者名稱 render 主頁
+    return render_template('index.html', username=session['username'])
+
+
+# 登出功能（點左上角登出用）
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('page_login_root'))
 
 
 if __name__ == '__main__':
